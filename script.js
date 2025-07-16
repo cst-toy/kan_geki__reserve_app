@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // フォームデータの取得
         const formData = new FormData(reservationForm);
         const reservationData = {
-            performanceId: formData.get('performance-id'),
+            performanceId: formData.get('performance-id'), // これは現在バックエンドでは使用していませんが、将来のために残します
             showId: formData.get('show-date'),
             userName: formData.get('user-name'),
             userEmail: formData.get('user-email'),
@@ -87,32 +87,39 @@ document.addEventListener('DOMContentLoaded', () => {
             notes: formData.get('notes')
         };
 
-        console.log('予約データ:', reservationData);
+        console.log('送信する予約データ:', reservationData);
 
-        // ここでバックエンドAPIへのデータ送信処理を実装します
-        // 例: fetch('/api/reservations', { method: 'POST', body: JSON.stringify(reservationData), headers: { 'Content-Type': 'application/json' } })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log('予約成功:', data);
-        //         // 予約完了メッセージの表示や、完了画面への遷移
-        //         alert(`予約が完了しました！\n受付番号: ${data.receiptNumber || 'XXXX-XXXX'}\nご登録のメールアドレスに詳細をお送りしました。`);
-        //         reservationForm.reset(); // フォームをリセット
-        //         // 公演一覧に戻る
-        //         performanceListSection.style.display = 'block';
-        //         reservationFormSection.style.display = 'none';
-        //     })
-        //     .catch(error => {
-        //         console.error('予約エラー:', error);
-        //         alert('予約中にエラーが発生しました。もう一度お試しください。');
-        //     });
+        try {
+            // バックエンドAPIへのデータ送信
+            const response = await fetch('http://localhost:3000/api/reservations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reservationData)
+            });
 
-        // 現時点では、仮の成功メッセージとフォームリセット、画面切り替え
-        // 実際のアプリでは、バックエンドからのレスポンスを待ってからこれらの処理を行います。
-        // alert('予約を送信しました！ (これはデモです)'); // alertは非推奨のため、カスタムメッセージボックスに置き換える
-        displayMessage('予約を送信しました！これはデモです。', 'success');
-        reservationForm.reset(); // フォームをリセット
-        performanceListSection.style.display = 'block'; // 公演一覧に戻る
-        reservationFormSection.style.display = 'none';
+            const result = await response.json();
+
+            if (response.ok) { // HTTPステータスコードが2xxの場合
+                console.log('予約成功:', result);
+                displayMessage(`予約が完了しました！\n受付番号: ${result.receiptNumber}\nご登録のメールアドレスに詳細をお送りしました。`, 'success');
+                reservationForm.reset(); // フォームをリセット
+                // 予約成功後、公演一覧に戻る
+                performanceListSection.style.display = 'block';
+                reservationFormSection.style.display = 'none';
+                window.scrollTo(0, 0); // ページトップにスクロール
+
+                // 予約成功後、公演リストを再読み込みして残席数を更新する処理があれば理想的
+                // 例: fetchPerformances(); // 仮の関数
+            } else {
+                console.error('予約エラー:', result.error || '不明なエラー');
+                displayMessage(`予約に失敗しました: ${result.error || '不明なエラー'}`, 'error');
+            }
+        } catch (error) {
+            console.error('通信エラー:', error);
+            displayMessage('サーバーとの通信中にエラーが発生しました。', 'error');
+        }
     });
 
     // 3. 「公演一覧に戻る」ボタンのクリックイベント
