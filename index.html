@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>観劇予約アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>観劇予約アプリ</h1>
+    </header>
+
+    <main>
+        <section id="performance-list">
+            <h2>開催中の公演</h2>
+            <div class="performance-cards-container">
+                <div class="performance-card">
+                    <h3>感動のミュージカル「星の歌」</h3>
+                    <p class="description">夜空に輝く星々が織りなす、壮大な愛と冒険の物語。心揺さぶる歌声と美しい舞台演出があなたを魅了します。</p>
+                    <p class="date">開催期間: 2025年8月1日(木) 〜 2025年8月15日(金)</p>
+                    <button class="detail-button" data-performance-id="perf001">詳細・予約へ</button>
+                </div>
+
+                <div class="performance-card">
+                    <h3>古典落語傑作選「笑いの殿堂」</h3>
+                    <p class="description">ベテランから若手まで、選りすぐりの落語家たちが贈る抱腹絶倒の二時間。日本の伝統芸能の真髄を体験してください。</p>
+                    <p class="date">開催期間: 2025年9月5日(金) 〜 2025年9月10日(水)</p>
+                    <button class="detail-button" data-performance-id="perf002">詳細・予約へ</button>
+                </div>
+
+                </div>
+        </section>
+
+        <section id="reservation-form-section" style="display: none;">
+            <h2>公演予約</h2>
+            <h3 id="selected-performance-title"></h3>
+            <form id="reservation-form">
+                <div class="form-group">
+                    <label for="show-date">上演日時:</label>
+                    <select id="show-date" name="show-date" required>
+                        <option value="">日時を選択してください</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="user-name">お名前:</label>
+                    <input type="text" id="user-name" name="user-name" required placeholder="山田 太郎">
+                </div>
+                <div class="form-group">
+                    <label for="user-email">メールアドレス:</label>
+                    <input type="email" id="user-email" name="user-email" required placeholder="example@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="num-tickets">枚数:</label>
+                    <select id="num-tickets" name="num-tickets" required>
+                        <option value="1">1枚</option>
+                        <option value="2">2枚</option>
+                        <option value="3">3枚</option>
+                        <option value="4">4枚</option>
+                        <option value="5">5枚</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">備考 (任意):</label>
+                    <textarea id="notes" name="notes" rows="3"></textarea>
+                </div>
+                <input type="hidden" id="selected-performance-id" name="performance-id">
+                <button type="submit">予約を確定する</button>
+                <button type="button" id="back-to-list-button">公演一覧に戻る</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 観劇予約アプリ. All rights reserved.</p>
+    </footer>
+
+    </body>
+</html>

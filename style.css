@@ -1,0 +1,233 @@
+/* 基本的なリセットとフォント */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* ヘッダー */
+header {
+    background-color: #5a2e9b; /* 紫系 */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+/* メインコンテンツエリア */
+main {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* セクションタイトル */
+h2 {
+    color: #5a2e9b;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* 公演カードコンテナ */
+.performance-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* レスポンシブ対応 */
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* 各公演カード */
+.performance-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease-in-out;
+}
+
+.performance-card:hover {
+    transform: translateY(-5px);
+}
+
+.performance-card h3 {
+    color: #333;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    min-height: 50px; /* タイトルが短い場合でも高さが揃うように */
+}
+
+.performance-card .description {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #555;
+    flex-grow: 1; /* 内容に応じて伸縮 */
+    margin-bottom: 15px;
+}
+
+.performance-card .date {
+    font-size: 0.85em;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.performance-card .detail-button {
+    background-color: #7b46d1; /* 明るい紫 */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+    align-self: flex-start; /* ボタンを左寄せにする */
+    width: 100%; /* カード幅いっぱいに */
+}
+
+.performance-card .detail-button:hover {
+    background-color: #6a3aa6;
+}
+
+/* 予約フォームセクション */
+#reservation-form-section {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    margin-top: 40px;
+}
+
+#selected-performance-title {
+    color: #5a2e9b;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 20px); /* 左右のpaddingを考慮 */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box; /* paddingとborderをwidthに含める */
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #7b46d1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(123, 70, 209, 0.2);
+}
+
+#reservation-form button[type="submit"] {
+    background-color: #5cb85c; /* 緑系 */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+    margin-right: 15px;
+}
+
+#reservation-form button[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+#reservation-form #back-to-list-button {
+    background-color: #6c757d; /* グレー系 */
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+#reservation-form #back-to-list-button:hover {
+    background-color: #5a6268;
+}
+
+/* フッター */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    background-color: #e9ecef;
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+/* レスポンシブ対応の調整 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    main {
+        margin: 15px auto;
+        padding: 0 15px;
+    }
+
+    .performance-card {
+        padding: 20px;
+    }
+
+    .performance-card h3 {
+        font-size: 1.5em;
+        min-height: auto;
+    }
+
+    .performance-card .detail-button {
+        font-size: 1em;
+        padding: 10px 15px;
+    }
+
+    #reservation-form-section {
+        padding: 20px;
+    }
+
+    #selected-performance-title {
+        font-size: 1.5em;
+    }
+
+    #reservation-form button {
+        width: 100%;
+        margin-top: 10px;
+        margin-right: 0;
+    }
+
+    #reservation-form button[type="submit"] {
+        margin-bottom: 10px;
+    }
+}
