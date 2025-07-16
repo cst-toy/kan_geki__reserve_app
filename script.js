@@ -11,21 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedPerformanceIdInput = document.getElementById('selected-performance-id'); // 選択された公演IDを保持する隠しフィールド
 
     // 仮の公演データ（本来はバックエンドから取得します）
+    // IMPORTANT: show.id をデータベースのIDに合わせて整数値に変更しました。
     const performances = {
-        'perf001': {
+        'perf001': { // このIDはフロントエンド内部での識別用
             title: '感動のミュージカル「星の歌」',
             shows: [
-                { id: 'show001-0801', date: '2025年8月1日(木) 14:00', capacity: 100, remaining: 80 },
-                { id: 'show001-0802', date: '2025年8月2日(金) 18:30', capacity: 100, remaining: 50 },
-                { id: 'show001-0803', date: '2025年8月3日(土) 13:00', capacity: 100, remaining: 10 },
-                { id: 'show001-0804', date: '2025年8月4日(日) 13:00', capacity: 100, remaining: 0 } // 満席の例
+                // ここで、データベースに実際に追加するshowsテーブルのIDと合わせる必要があります。
+                // 例として、仮の整数IDを割り当てます。
+                // 実際のアプリでは、バックエンドから取得したshowsのID（整数）を使用します。
+                { id: 1, date: '2025年8月1日(木) 14:00', capacity: 100, remaining: 80 },
+                { id: 2, date: '2025年8月2日(金) 18:30', capacity: 100, remaining: 50 },
+                { id: 3, date: '2025年8月3日(土) 13:00', capacity: 100, remaining: 10 },
+                { id: 4, date: '2025年8月4日(日) 13:00', capacity: 100, remaining: 0 } // 満席の例
             ]
         },
-        'perf002': {
+        'perf002': { // このIDはフロントエンド内部での識別用
             title: '古典落語傑作選「笑いの殿堂」',
             shows: [
-                { id: 'show002-0905', date: '2025年9月5日(金) 19:00', capacity: 80, remaining: 70 },
-                { id: 'show002-0906', date: '2025年9月6日(土) 15:00', capacity: 80, remaining: 25 }
+                // ここで、データベースに実際に追加するshowsテーブルのIDと合わせる必要があります。
+                { id: 5, date: '2025年9月5日(金) 19:00', capacity: 80, remaining: 70 },
+                { id: 6, date: '2025年9月6日(土) 15:00', capacity: 80, remaining: 25 }
             ]
         }
         // 他の公演データもここに追加
@@ -50,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 選択された公演の上演日時をドロップダウンに追加
                 selectedPerformance.shows.forEach(show => {
                     const option = document.createElement('option');
-                    option.value = show.id; // 上演IDを値に設定
+                    // option.value には、データベースの shows テーブルの実際のID（整数）を設定します
+                    option.value = show.id; // show.id は整数値になりました
                     // 残席がある場合のみ選択可能にする
                     if (show.remaining > 0) {
                         option.textContent = `${show.date} (残席: ${show.remaining})`;
@@ -80,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(reservationForm);
         const reservationData = {
             performanceId: formData.get('performance-id'), // これは現在バックエンドでは使用していませんが、将来のために残します
-            showId: formData.get('show-date'),
+            showId: parseInt(formData.get('show-date'), 10), // ここで showId を整数に変換！
             userName: formData.get('user-name'),
             userEmail: formData.get('user-email'),
             numTickets: parseInt(formData.get('num-tickets'), 10),
