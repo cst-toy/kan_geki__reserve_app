@@ -1,0 +1,186 @@
+/* admin.css */
+
+/* 管理者画面の全体的な調整 */
+body {
+    background-color: #e0e7eb; /* 少し暗めの背景色 */
+}
+
+header {
+    background-color: #34495e; /* ダークブルー */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+header h1 {
+    font-size: 2em;
+    margin: 0;
+}
+
+header nav #logout-button {
+    background-color: #e74c3c; /* 赤系 */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+header nav #logout-button:hover {
+    background-color: #c0392b;
+}
+
+main {
+    max-width: 1200px; /* 管理者画面は広めに */
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+section {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #34495e;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #bdc3c7;
+    padding-bottom: 10px;
+}
+
+/* フォームのスタイル（既存のstyle.cssと共通部分が多いが、管理者用に調整） */
+#admin-login-form .form-group label {
+    color: #555;
+}
+
+#admin-login-form button[type="submit"] {
+    background-color: #2ecc71; /* 緑系 */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+    display: block; /* ボタンをブロック要素にする */
+    width: 100%; /* 幅いっぱいに */
+    max-width: 300px; /* 最大幅を設定 */
+    margin: 20px auto 0; /* 中央寄せ */
+}
+
+#admin-login-form button[type="submit"]:hover {
+    background-color: #27ae60;
+}
+
+/* ダッシュボードコントロール */
+.dashboard-controls {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+#export-csv-button {
+    background-color: #3498db; /* 青系 */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#export-csv-button:hover {
+    background-color: #2980b9;
+}
+
+/* テーブルスタイル */
+.table-container {
+    overflow-x: auto; /* 横スクロールを可能にする */
+}
+
+#reservations-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#reservations-table th,
+#reservations-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+#reservations-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+}
+
+#reservations-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#reservations-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* メッセージボックス */
+.message-box {
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.message-box.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message-box.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header h1 {
+        margin-bottom: 10px;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    #reservations-table th,
+    #reservations-table td {
+        padding: 8px 10px;
+        font-size: 0.8em;
+    }
+
+    .dashboard-controls {
+        text-align: center;
+    }
+
+    #export-csv-button {
+        width: 100%;
+    }
+}
